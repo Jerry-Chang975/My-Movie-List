@@ -74,56 +74,6 @@
       <!-- movie list -->
       <div class="row" id="data-panel">
         <!-- Render movie list -->
-        <div class="col-sm-3">
-          <div class="mb-2">
-            <div class="card" style="width: 100%">
-              <img
-                src="https://m.media-amazon.com/images/M/MV5BMDExZGMyOTMtMDgyYi00NGIwLWJhMTEtOTdkZGFjNmZiMTEwXkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_.jpg"
-                class="card-img-top"
-                alt="movie poster"
-              />
-              <div class="card-body">
-                <h5 class="card-title">John Wick 4</h5>
-                <button
-                  href="#"
-                  class="btn btn-primary btn-show-movie"
-                  data-bs-toggle="modal"
-                  data-bs-target="#movie-modal"
-                >
-                  More
-                </button>
-                <button href="#" class="btn btn-info btn-add-favorite">
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="mb-2">
-            <div class="card" style="width: 100%">
-              <img
-                src="https://images-na.ssl-images-amazon.com/images/S/pv-target-images/459543e33775972b85d72b253740f3c36c809ce05aaa19b6c1227231877e60e1._RI_TTW_.jpg"
-                class="card-img-top mx-auto"
-                alt="movie poster"
-              />
-              <div class="card-body">
-                <h5 class="card-title">John Wick 3</h5>
-                <button
-                  href="#"
-                  class="btn btn-primary btn-show-movie"
-                  data-bs-toggle="modal"
-                  data-bs-target="#movie-modal"
-                >
-                  More
-                </button>
-                <button href="#" class="btn btn-info btn-add-favorite">
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -156,10 +106,10 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="movie-modal-title">Movie Name</h5>
             <button
               type="button"
               class="btn-close"
@@ -167,7 +117,24 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-8">
+                  <img
+                    src="<https://github.com/ALPHACamp/movie-list-api/blob/master/public/posters/c9XxwwhPHdaImA2f1WEfEsbhaFB.jpg?raw=true>"
+                    alt="movie-poster"
+                    class="img-fluid"
+                    id="movie-modal-image"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <p><em id="movie-modal-date">release date: 2020/01/05</em></p>
+                  <p id="movie-modal-description">This is a movie.</p>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="modal-footer">
             <button
               type="button"
@@ -176,7 +143,6 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
