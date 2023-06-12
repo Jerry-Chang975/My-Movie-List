@@ -30,14 +30,20 @@ function renderMovieList(data) {
         >
           More
         </button>
-        <button href="#" class="btn btn-info btn-add-favorite">
+        <button href="#" class="btn btn-info btn-add-favorite" data-id="${
+          movie.id
+        }">
           +
         </button>
       </div>
     </div>`;
   });
 
-  movieContainer.innerHTML = rawHTML;
+  if (rawHTML) {
+    movieContainer.innerHTML = rawHTML;
+  } else {
+    movieContainer.innerHTML = '<h1>Not found!</h1>';
+  }
 }
 
 async function getMovieData() {
@@ -45,31 +51,6 @@ async function getMovieData() {
   movieList.push(...res.data.results);
   renderMovieList(movieList);
 }
-
-movieContainer.addEventListener('click', (e) => {
-  // check the click btn
-  if (e.target.matches('.btn-show-movie')) {
-    const movieTitle = document.querySelector('#movie-modal-title');
-    const movieImgContainer = document.querySelector('#movie-modal-image');
-    const movieRelease = document.querySelector('#movie-modal-date');
-    const movieDescription = document.querySelector('#movie-modal-description');
-    axios.get(INDEX_URL + String(e.target.dataset.id)).then((res) => {
-      let { title, image, release_date, description } = res.data.results;
-      console.log(title);
-      console.log(release_date);
-      console.log(description);
-
-      movieTitle.textContent = title;
-      movieImgContainer.src = POSTER_URL + image;
-      movieDescription.textContent = description;
-      movieRelease.textContent = 'release date: ' + release_date;
-
-      // movieTitle.textContent =
-    });
-
-    console.log(e.target.dataset.id);
-  }
-});
 
 // search function
 // 1. get search input keyword
@@ -107,7 +88,7 @@ const searchInput = document.querySelector('#search-input');
 searchInput.addEventListener('input', (event) => {
   event.preventDefault(); // stop submit event
 
-  if (searchInput.value) {
+  if (searchInput.value.trim()) {
     // 2. traverse the movieList and filter
     const searchedMovieList = searchMovies(searchInput.value, movieList);
 
@@ -115,6 +96,31 @@ searchInput.addEventListener('input', (event) => {
     renderMovieList(searchedMovieList);
   } else {
     renderMovieList(movieList);
+  }
+});
+
+// addFavorite function
+// 1. add eventListener in plus btn
+// 2. get id of movie in favMovies that has been selected
+// 3. save into localStorage
+
+function addToFavorite(movieId) {
+  const favMovies = JSON.parse(localStorage.getItem('favMovies')) || [];
+  const movie = movieList.find((movie) => movie.id === movieId);
+  if (favMovies.some((movie) => movie.id === movieId)) {
+    alert('This movie has already been add to favorite list!');
+  } else {
+    favMovies.push(movie);
+    localStorage.setItem('favMovies', JSON.stringify(favMovies));
+    alert('Add to favorite successfully!');
+  }
+}
+
+movieContainer.addEventListener('click', (event) => {
+  if (event.target.classList.contains('btn-add-favorite')) {
+    const movieId = parseInt(event.target.dataset.id);
+    // add into favMovies
+    addToFavorite(movieId);
   }
 });
 
