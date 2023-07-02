@@ -5,53 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Movie List</title>
   </head>
+
   <body>
-    <!-- navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--   navigation -->
+    <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Movie List</a>
+        <a class="navbar-brand" href="./index.html">Movie List</a>
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#navbarToggler"
+          aria-controls="navbarToggler"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarToggler">
+          <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./index.html"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item active">
               <a class="nav-link" href="#">Favorite</a>
             </li>
           </ul>
+          <label class="m-2" for="colorMode"
+            ><i class="fa fa-moon-o fa-lg m-2" style=""></i
+          ></label>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="colorMode"
+              checked
+            />
+          </div>
+          <label class="form-check-label" for="colorMode"
+            ><i class="fa fa-sun-o fa-lg m-2" aria-hidden="true"></i
+          ></label>
         </div>
       </div>
     </nav>
-    <!-- main page -->
-    <div class="container mt-5">
-      <!-- movie list -->
-      <div class="container d-flex flex-wrap" id="data-panel">
-        <!-- Render movie list -->
+    <!-- list-card-switch -->
+    <div id="list-card-switch">
+      <i class="fa fa-th" aria-hidden="true" data-render-mode="card"></i>
+      <i class="fa fa-bars" aria-hidden="true" data-render-mode="list"></i>
+    </div>
+    <!--   data panel -->
+    <div class="container">
+      <div class="row">
+        <div
+          class="container d-flex flex-wrap justify-content-center"
+          id="data-panel"
+        >
+          <!--  movie-data -->
+        </div>
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- pagination -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center"></ul>
+    </nav>
+
+    <!--   movie detail modal -->
     <div
       class="modal fade"
       id="movie-modal"
@@ -60,9 +89,9 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div id="modalColor" class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="movie-modal-title">Movie Name</h5>
+            <h1 class="modal-title fs-5" id="modal-movie-title">Modal title</h1>
             <button
               type="button"
               class="btn-close"
@@ -73,18 +102,15 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-5">
                   <img
-                    src="<https://github.com/ALPHACamp/movie-list-api/blob/master/public/posters/c9XxwwhPHdaImA2f1WEfEsbhaFB.jpg?raw=true>"
-                    alt="movie-poster"
+                    src=""
                     class="img-fluid"
-                    id="movie-modal-image"
+                    alt="movie-image"
+                    id="modal-movie-img"
                   />
                 </div>
-                <div class="col-md-4">
-                  <p><em id="movie-modal-date">release date: 2020/01/05</em></p>
-                  <p id="movie-modal-description">This is a movie.</p>
-                </div>
+                <div class="col-7" id="modal-movie-detail"></div>
               </div>
             </div>
           </div>
@@ -100,18 +126,12 @@
         </div>
       </div>
     </div>
-
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
-      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="./favorite.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="favorite.js"></script>
   </body>
 </html>

@@ -5,94 +5,118 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Movie List</title>
   </head>
+
   <body>
-    <!-- navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- loading -->
+    <!--   navigation -->
+    <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Movie List</a>
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#navbarToggler"
+          aria-controls="navbarToggler"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+          <ul class="navbar-nav me-auto">
             <li class="nav-item">
               <a class="nav-link" href="./favorite.html">Favorite</a>
             </li>
           </ul>
+          <label class="m-2" for="colorMode"
+            ><i class="fa fa-moon-o fa-lg m-2"></i
+          ></label>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="colorMode"
+              checked
+            />
+          </div>
+          <label class="form-check-label" for="colorMode"
+            ><i class="fa fa-sun-o fa-lg m-2" aria-hidden="true"></i
+          ></label>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control ms-3"
+              type="search"
+              placeholder="Search..."
+              aria-label="Search"
+              id="movie-search-input"
+            />
+          </form>
         </div>
       </div>
     </nav>
-    <!-- main page -->
-    <div class="container mt-5">
-      <!-- search -->
+
+    <!-- list-card-switch -->
+    <div id="list-card-switch">
+      <i class="fa fa-th" aria-hidden="true" data-render-mode="card"></i>
+      <i class="fa fa-bars" aria-hidden="true" data-render-mode="list"></i>
+    </div>
+    <!--   data panel -->
+    <div class="container">
       <div class="row">
-        <form
-          class="row row-cols-lg-auto g-3 align-items-center mb-2"
-          id="search-form"
+        <div
+          class="container d-flex flex-wrap justify-content-center"
+          id="data-panel"
         >
-          <div class="col-12">
-            <label class="visually-hidden" for="specificSizeInputName"
-              >Name</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="search-input"
-              placeholder="Keyword..."
-            />
+          <div class="loading">
+            <div class="spinner-grow text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-success" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-danger" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-info" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-dark" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
           </div>
-          <div class="col-12">
-            <button class="btn btn-primary" id="search-submit-button">
-              Search
-            </button>
-          </div>
-        </form>
-      </div>
-      <!-- movie list -->
-      <div class="container d-flex flex-wrap" id="data-panel">
-        <!-- Render movie list -->
+        </div>
       </div>
     </div>
 
     <!-- pagination -->
     <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
+      <ul class="pagination justify-content-center"></ul>
     </nav>
 
-    <!-- Modal -->
+    <!--   movie detail modal -->
     <div
       class="modal fade"
       id="movie-modal"
@@ -101,9 +125,9 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div id="modalColor" class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="movie-modal-title">Movie Name</h5>
+            <h1 class="modal-title fs-5" id="modal-movie-title">Modal title</h1>
             <button
               type="button"
               class="btn-close"
@@ -114,18 +138,15 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-5">
                   <img
-                    src="<https://github.com/ALPHACamp/movie-list-api/blob/master/public/posters/c9XxwwhPHdaImA2f1WEfEsbhaFB.jpg?raw=true>"
-                    alt="movie-poster"
+                    src=""
                     class="img-fluid"
-                    id="movie-modal-image"
+                    alt="movie-image"
+                    id="modal-movie-img"
                   />
                 </div>
-                <div class="col-md-4">
-                  <p><em id="movie-modal-date">release date: 2020/01/05</em></p>
-                  <p id="movie-modal-description">This is a movie.</p>
-                </div>
+                <div class="col-7" id="modal-movie-detail"></div>
               </div>
             </div>
           </div>
@@ -141,18 +162,12 @@
         </div>
       </div>
     </div>
-
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
-      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="./index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
